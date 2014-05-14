@@ -1,0 +1,1 @@
+Implementation of the Bootstrap-t procedure to obtain confidence intervals on time-series data
