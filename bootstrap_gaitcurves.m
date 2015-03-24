@@ -50,6 +50,7 @@ function [c_b, cilo_b, cihi_b,c,cilo,cihi,mu_b,mu,se_b,se,meanmu_b,bias] = boots
 
 
 
+
 %--SET DEFAULTS--------------------------------------------------------------------------
 %
 if nargin==0
@@ -109,7 +110,7 @@ mu_b = zeros(nboots,cols);
 t = zeros(nboots,1);
 
 for b = 1:nboots
-    [~,indx] = datasample(data(:,1),n);               % indx of bth curve
+    indx = randi(n,n,1);                              % random resamp with replacement of n curves
     xb1 = data(indx',:);                              % bth bootstrap sample of data
     mu_b(b,:) = mean(xb1);                            % bth bootstrap estimate of the mean
 end
@@ -126,7 +127,8 @@ end
 %
 c_b = prctile(t,100*(1-alpha/2));
 
-
+% t_sort = sort(t);   % if missing stats toolbox
+% t_sort(   ( (1-alpha/2)*nboots   ) )
 
 %--COMPUTE CONFIDENCE INTERVALS-----------------------------------------------------------------
 %
